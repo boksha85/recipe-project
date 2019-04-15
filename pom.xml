@@ -55,15 +55,6 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
     <repositories>
         <repository>
             <id>spring-snapshots</id>
@@ -101,7 +92,6 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-
 
     <build>
         <plugins>

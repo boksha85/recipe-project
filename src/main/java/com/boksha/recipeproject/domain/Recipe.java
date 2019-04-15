@@ -19,8 +19,6 @@ public class Recipe {
   private String source;
   private String url;
   private String directions;
-  //todo add
-  //private Difficulty difficulty;
 
   @OneToOne(fetch = FetchType.EAGER)
   private UnitOfMeasure uom;
@@ -31,6 +29,10 @@ public class Recipe {
 
   @Lob
   private Byte[] image;
+
+  //ordinal will get as number 1,2,3, but string will use values
+  @Enumerated(value = EnumType.STRING)
+  private Difficulty difficulty;
 
   @OneToOne(cascade = CascadeType.ALL)
   private Notes notes;
@@ -121,6 +123,14 @@ public class Recipe {
 
   public void setImage(Byte[] image) {
     this.image = image;
+  }
+
+  public Difficulty getDifficulty() {
+    return difficulty;
+  }
+
+  public void setDifficulty(Difficulty difficulty) {
+    this.difficulty = difficulty;
   }
 
   public Notes getNotes() {

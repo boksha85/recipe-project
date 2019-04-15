@@ -22,6 +22,9 @@ public class Recipe {
   //todo add
   //private Difficulty difficulty;
 
+  @OneToOne(fetch = FetchType.EAGER)
+  private UnitOfMeasure uom;
+
   //recipe is target in Ingredient class
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
   private Set<Ingredient> ingredients;
@@ -94,6 +97,14 @@ public class Recipe {
 
   public void setDirections(String directions) {
     this.directions = directions;
+  }
+
+  public UnitOfMeasure getUom() {
+    return uom;
+  }
+
+  public void setUom(UnitOfMeasure uom) {
+    this.uom = uom;
   }
 
   public Set<Ingredient> getIngredients() {

@@ -1,7 +1,5 @@
 package com.boksha.recipeproject.domain;
 
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -20,9 +18,6 @@ public class Recipe {
   private String url;
   private String directions;
 
-  @OneToOne(fetch = FetchType.EAGER)
-  private UnitOfMeasure uom;
-
   //recipe is target in Ingredient class
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
   private Set<Ingredient> ingredients;
@@ -36,6 +31,12 @@ public class Recipe {
 
   @OneToOne(cascade = CascadeType.ALL)
   private Notes notes;
+
+  @ManyToMany
+  @JoinTable(name = "recipe_catetory",
+          joinColumns = @JoinColumn(name = "recipe_id"),
+          inverseJoinColumns = @JoinColumn(name = "category_id"))
+  private Set<Category> categories;
 
   public Long getId() {
     return id;
@@ -101,14 +102,6 @@ public class Recipe {
     this.directions = directions;
   }
 
-  public UnitOfMeasure getUom() {
-    return uom;
-  }
-
-  public void setUom(UnitOfMeasure uom) {
-    this.uom = uom;
-  }
-
   public Set<Ingredient> getIngredients() {
     return ingredients;
   }
@@ -139,5 +132,13 @@ public class Recipe {
 
   public void setNotes(Notes notes) {
     this.notes = notes;
+  }
+
+  public Set<Category> getCategories() {
+    return categories;
+  }
+
+  public void setCategories(Set<Category> categories) {
+    this.categories = categories;
   }
 }

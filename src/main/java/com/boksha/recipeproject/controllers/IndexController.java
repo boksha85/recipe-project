@@ -1,33 +1,23 @@
 package com.boksha.recipeproject.controllers;
 
-import com.boksha.recipeproject.domain.Category;
-import com.boksha.recipeproject.domain.UnitOfMeasure;
-import com.boksha.recipeproject.repositories.CategoryRepository;
-import com.boksha.recipeproject.repositories.UnitOfMeasureRepository;
+import com.boksha.recipeproject.service.RecipeService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Optional;
 
 @Controller
 public class IndexController {
 
-    private CategoryRepository categoryRepository;
-    private UnitOfMeasureRepository unitOfMeasureRepository;
+    private RecipeService recipeService;
 
-    public IndexController(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
-        this.categoryRepository = categoryRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
     @RequestMapping({"", "/", "/index"})
-    public String getIndexPage() {
+    public String getIndexPage(Model model) {
+        model.addAttribute("recipes", recipeService.getRecipes());
 
-        Optional<Category> categoryOptional = categoryRepository.findByDescription("American");
-        Optional<UnitOfMeasure> unitOfMeasureOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
-
-        System.out.println("Cat id is: " + categoryOptional.get().getId());
-        System.out.println("UOM id is: " + unitOfMeasureOptional.get().getId());
         return "index";
     }
 }

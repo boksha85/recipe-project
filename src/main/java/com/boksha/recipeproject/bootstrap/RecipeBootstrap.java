@@ -4,15 +4,18 @@ import com.boksha.recipeproject.domain.*;
 import com.boksha.recipeproject.repositories.CategoryRepository;
 import com.boksha.recipeproject.repositories.RecipeRepository;
 import com.boksha.recipeproject.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -27,11 +30,13 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
   }
 
   @Override
+  @Transactional
   public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
     recipeRepository.saveAll(getRecipes());
   }
 
   private List<Recipe> getRecipes() {
+    log.debug("Called bootstrap getRecipes()");
     List<Recipe> recipes = new ArrayList<>(2);
 
     //get UOMs
@@ -71,6 +76,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
       throw new RuntimeException("Expected UOM Not Found - Cup");
     }
 
+    log.debug("Get unit of measures");
+
     //get optionals
     UnitOfMeasure eachUom = eachUomOptional.get();
     UnitOfMeasure tableSpoonUom = tableSpoonUomOptional.get();
@@ -92,8 +99,11 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
       throw new RuntimeException("Expected Category Not Found - Mexican");
     }
 
+    log.debug("Get categories");
     Category americanCategory = americanCategoryOptional.get();
     Category mexicanCategory = mexicanCategoryOptional.get();
+
+    log.debug("Create recipes");
 
     //Yummy Guac
     Recipe guacRecipe = new Recipe();
@@ -200,6 +210,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     tacosRecipe.getCategories().add(mexicanCategory);
 
     recipes.add(tacosRecipe);
+
+    log.debug("finish bootstrap");
 
     return recipes;
   }

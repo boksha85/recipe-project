@@ -147,6 +147,10 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     guacRecipe.addIngredient(new Ingredient("freshly grated black pepper", new BigDecimal(2), dashUom));
     guacRecipe.addIngredient(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(".5"), eachUom));
 
+    guacRecipe.setUrl("http://www.simplyrecipes.com/recipes/perfect_guacamole/");
+    guacRecipe.setServings(4);
+    guacRecipe.setSource("Simply Recipes");
+
     guacRecipe.getCategories().add(americanCategory);
     guacRecipe.getCategories().add(mexicanCategory);
 
@@ -208,6 +212,9 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
     tacosRecipe.getCategories().add(americanCategory);
     tacosRecipe.getCategories().add(mexicanCategory);
+    tacosRecipe.setUrl("http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos");
+    tacosRecipe.setSource("Simply Recipes");
+    tacosRecipe.setServings(4);
 
     recipes.add(tacosRecipe);
 

@@ -1,5 +1,7 @@
 package com.boksha.recipeproject.service;
 
+import com.boksha.recipeproject.converters.RecipeCommandToRecipe;
+import com.boksha.recipeproject.converters.RecipeToRecipeCommand;
 import com.boksha.recipeproject.domain.Recipe;
 import com.boksha.recipeproject.repositories.RecipeRepository;
 import org.junit.Before;
@@ -7,6 +9,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -26,11 +29,17 @@ public class RecipeServiceImplTest
   @Mock
   RecipeRepository recipeRepository;
 
+  @Mock
+  RecipeCommandToRecipe recipeCommandToRecipe;
+
+  @Mock
+  RecipeToRecipeCommand recipeToRecipeCommand;
+
   @Before
   public void setUp() throws Exception
   {
     MockitoAnnotations.initMocks(this);
-    recipeService = new RecipeServiceImpl(recipeRepository);
+    recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
   }
 
   @Test

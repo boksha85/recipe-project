@@ -14,11 +14,10 @@ import static org.junit.Assert.*;
  */
 public class CategoryCommandToCategoryTest
 {
-
   private final long ID_VALUE = new Long(1L);
   private final String DESCRIPTION = "description";
 
-  CategoryCommandToCategory converter;
+  private CategoryCommandToCategory converter;
 
   @Before
   public void setUp() throws Exception

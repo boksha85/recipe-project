@@ -72,11 +72,11 @@ public class RecipeControllerTest
     RecipeCommand recipeCommand = new RecipeCommand();
     recipeCommand.setId(2L);
 
-    Mockito.when(recipeService.findCommandById(Mockito.anyLong())).thenReturn(recipeCommand);
+    Mockito.when(recipeService.saveRecipeCommand(any())).thenReturn(recipeCommand);
 
     mockMvc.perform(post("/recipe")
       .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-      .param("id", "3")
+      .param("id", "")
       .param("description", "some string")
     )
       .andExpect(status().is3xxRedirection())

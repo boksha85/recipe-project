@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  */
 public class CategoryCommandToCategoryTest
 {
-  private final long ID_VALUE = new Long(1L);
+  private final Long ID_VALUE = new Long(1L);
   private final String DESCRIPTION = "description";
 
   private CategoryCommandToCategory converter;
@@ -36,7 +36,6 @@ public class CategoryCommandToCategoryTest
   {
     assertNotNull(converter.convert(new CategoryCommand()));
   }
-
 
   @Test
   public void convert()
